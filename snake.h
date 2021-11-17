@@ -1,7 +1,6 @@
 #ifndef SNAKE_SNAKE_H
 #define SNAKE_SNAKE_H
 
-#include "vector"
 #include "tuple"
 
 using namespace std;
