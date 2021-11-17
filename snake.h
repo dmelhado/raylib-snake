@@ -1,7 +1,7 @@
 #ifndef SNAKE_SNAKE_H
 #define SNAKE_SNAKE_H
 
-#include "tuple"
+#include <tuple>
 
 using namespace std;
 
@@ -22,19 +22,13 @@ struct snakeNode{
 class snake {
 public:
     snake(int boardWidth, int boardHeight);
-
     ~snake();
-
     void move(pair<int,int> fruit);
-
     bool shouldGameOver();
-
     void turn(directions direction);
-
     snakeNode *getHead();
 
 private:
-
     snakeNode *_head;
     snakeNode *_last;
     int _lenght;
@@ -43,9 +37,5 @@ private:
     int _boardHeight;
 
     directions _direction;
-
-
 };
-
-
 #endif //SNAKE_SNAKE_H

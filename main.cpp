@@ -1,6 +1,5 @@
 #include <iostream>
 #include <raylib.h>
-#include <tuple>
 
 #include "snake.h"
 
@@ -13,18 +12,14 @@ void renderSquare(pair<int, int> position, Color color) {
 pair<int, int> randomFruit(snake &player, int boardWidth, int boardHeight) {
     pair<int, int> fruit = make_pair(GetRandomValue(0, boardWidth - 1), GetRandomValue(0, boardHeight - 1));
 
-    bool safe = false;
-    while (!safe) {
-        snakeNode *currentPosition = player.getHead();
-        while (currentPosition != nullptr) {
-            if (currentPosition->_position == fruit) {
-                fruit = make_pair(GetRandomValue(0, boardWidth - 1), GetRandomValue(0, boardHeight - 1));
-                currentPosition = player.getHead();
-            } else {
-                currentPosition = currentPosition->_next;
-            }
+    snakeNode *currentPosition = player.getHead();
+    while (currentPosition != nullptr) {
+        if (currentPosition->_position == fruit) {
+            fruit = make_pair(GetRandomValue(0, boardWidth - 1), GetRandomValue(0, boardHeight - 1));
+            currentPosition = player.getHead();
+        } else {
+            currentPosition = currentPosition->_next;
         }
-        safe = true;
     }
     return fruit;
 }

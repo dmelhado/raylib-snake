@@ -74,7 +74,6 @@ void snake::turn(directions direction) {
         (direction == R && _direction != L)) {
         _direction = direction;
     }
-
 }
 
 snakeNode *snake::getHead() {
