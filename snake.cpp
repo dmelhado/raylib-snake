@@ -2,6 +2,7 @@
 
 //Constructor
 snake::snake(int boardWidth, int boardHeight) {
+    //Snake starts in about the middle of the board
     int initX = boardWidth / 2 - 3;
     int initY = boardHeight / 2;
 
@@ -35,7 +36,7 @@ snake::~snake() {
 }
 
 void snake::move(pair<int, int> fruit) {
-    //new head
+    //Make a new head
     pair<int, int> newHeadPosition;
     switch (_direction) {
         case U:
@@ -56,7 +57,7 @@ void snake::move(pair<int, int> fruit) {
     _head->_prev = newHead;
     _head = newHead;
 
-    //if the snake's head is over a fruit, it grows without popping the last node
+    //If the snake's head is over a fruit, don't pop last node
     if (fruit == _head->_position) {
         _lenght++;
     } else {

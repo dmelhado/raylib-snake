@@ -12,6 +12,7 @@ void renderSquare(pair<int, int> position, Color color) {
 pair<int, int> randomFruit(snake &player, int boardWidth, int boardHeight) {
     pair<int, int> fruit = make_pair(GetRandomValue(0, boardWidth - 1), GetRandomValue(0, boardHeight - 1));
 
+    //re-generate another fruit until it's not colliding with snake
     snakeNode *currentPosition = player.getHead();
     while (currentPosition != nullptr) {
         if (currentPosition->_position == fruit) {
@@ -32,17 +33,14 @@ int main() {
     const int screenWidth = 15 + boardWidth * 25;
     const int screenHeight = 55 + boardHeight * 25;
 
-    Color backgroudColor = BLACK;
+    Color backgroundColor = BLACK;
     Color textColor = WHITE;
 
     InitWindow(screenWidth, screenHeight, "Raylib Snake");
-
     SetTargetFPS(4);
 
     int points = 0;
-
     snake player(boardWidth, boardHeight);
-
     pair<int, int> fruit = randomFruit(player, boardWidth, boardHeight);
 
     bool gameOver = false;
@@ -84,7 +82,7 @@ int main() {
         }
 
         BeginDrawing();
-        ClearBackground(backgroudColor);
+        ClearBackground(backgroundColor);
 
         //Draw board
         for (int i = 0; i < boardWidth; i++) {
@@ -107,10 +105,10 @@ int main() {
         }
         //Draw Text and game over screen
         if (gameOver) {
-            DrawRectangle(0, 0, screenWidth, 50, backgroudColor);
-            DrawRectangle(0, 0, 10, screenHeight, backgroudColor);
-            DrawRectangle(screenWidth - 10, 0, 10, screenHeight, backgroudColor);
-            DrawRectangle(0, screenHeight - 10, screenWidth, 10, backgroudColor);
+            DrawRectangle(0, 0, screenWidth, 50, backgroundColor);
+            DrawRectangle(0, 0, 10, screenHeight, backgroundColor);
+            DrawRectangle(screenWidth - 10, 0, 10, screenHeight, backgroundColor);
+            DrawRectangle(0, screenHeight - 10, screenWidth, 10, backgroundColor);
             DrawText("GAME OVER", screenWidth - 260, 5, 40, textColor);
         }
         DrawText(to_string(points).c_str(), 10, 5, 40, textColor);
