@@ -66,11 +66,19 @@ void snake::move(pair<int, int> fruit) {
 }
 
 void snake::turn(directions direction) {
-    if ((direction == U && _direction != D) ||
-        (direction == D && _direction != U) ||
-        (direction == L && _direction != R) ||
-        (direction == R && _direction != L)) {
-        _direction = direction;
+    switch (direction) {
+        case U:
+            if (_direction != D) { _direction = direction; }
+            break;
+        case D:
+            if (_direction != U) { _direction = direction; }
+            break;
+        case L:
+            if (_direction != R) { _direction = direction; }
+            break;
+        case R:
+            if (_direction != L) { _direction = direction; }
+            break;
     }
 }
 

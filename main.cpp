@@ -38,13 +38,14 @@ int main() {
 
     InitWindow(screenWidth, screenHeight, "Raylib Snake");
 
-    double ticksPerSecond = 6;
+    double ticksPerSecond = 5;
     double tickTime = 1 / ticksPerSecond;
 
     int points = 0;
     snake player(boardWidth, boardHeight);
     pair<int, int> fruit = randomFruit(player, boardWidth, boardHeight);
 
+    directions nextDirection = R;
     bool gameOver = false;
 
     while (!WindowShouldClose()) {
@@ -62,18 +63,19 @@ int main() {
 
         if (!gameOver) {
             if (IsKeyPressed(KEY_UP)) {
-                player.turn(U);
+                nextDirection = U;
             }
             if (IsKeyPressed(KEY_DOWN)) {
-                player.turn(D);
+                nextDirection = D;
             }
             if (IsKeyPressed(KEY_LEFT)) {
-                player.turn(L);
+                nextDirection = L;
             }
             if (IsKeyPressed(KEY_RIGHT)) {
-                player.turn(R);
+                nextDirection = R;
             }
             if(tickTime < 0){
+                player.turn(nextDirection);
                 player.move(fruit);
                 if (player.getHead()->_position == fruit) {
                     fruit = randomFruit(player, boardWidth, boardHeight);
@@ -121,6 +123,7 @@ int main() {
         DrawText(to_string(points).c_str(), 10, 5, 40, textColor);
         EndDrawing();
 
+        //calculate delta
         deltaTime -= GetTime();
         tickTime += deltaTime;
 
