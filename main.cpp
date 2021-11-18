@@ -37,7 +37,9 @@ int main() {
     Color textColor = WHITE;
 
     InitWindow(screenWidth, screenHeight, "Raylib Snake");
-    SetTargetFPS(4);
+
+    double ticksPerSecond = 6;
+    double tickTime = 1 / ticksPerSecond;
 
     int points = 0;
     snake player(boardWidth, boardHeight);
@@ -46,6 +48,9 @@ int main() {
     bool gameOver = false;
 
     while (!WindowShouldClose()) {
+        //deltaTime: time passed between frames
+        double deltaTime = GetTime();
+
         //reset the game
         if (IsKeyPressed(KEY_R)) {
             points = 0;
@@ -68,11 +73,13 @@ int main() {
             if (IsKeyPressed(KEY_RIGHT)) {
                 player.turn(R);
             }
-
-            player.move(fruit);
-            if (player.getHead()->_position == fruit) {
-                fruit = randomFruit(player, boardWidth, boardHeight);
-                points++;
+            if(tickTime < 0){
+                player.move(fruit);
+                if (player.getHead()->_position == fruit) {
+                    fruit = randomFruit(player, boardWidth, boardHeight);
+                    points++;
+                }
+                tickTime = 1 / ticksPerSecond;
             }
         }
 
@@ -113,6 +120,10 @@ int main() {
         }
         DrawText(to_string(points).c_str(), 10, 5, 40, textColor);
         EndDrawing();
+
+        deltaTime -= GetTime();
+        tickTime += deltaTime;
+
     }
     return 0;
 }

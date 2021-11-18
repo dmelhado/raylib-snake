@@ -21,7 +21,6 @@ snake::snake(int boardWidth, int boardHeight) {
     _boardHeight = boardHeight;
     _boardWidht = boardWidth;
 
-    _lenght = 3;
     _direction = R;
 }
 
@@ -58,9 +57,7 @@ void snake::move(pair<int, int> fruit) {
     _head = newHead;
 
     //If the snake's head is over a fruit, don't pop last node
-    if (fruit == _head->_position) {
-        _lenght++;
-    } else {
+    if (fruit != _head->_position) {
         snakeNode *lastPointer = _last;
         _last = _last->_prev;
         _last->_next = nullptr;

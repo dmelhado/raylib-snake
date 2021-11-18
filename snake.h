@@ -31,7 +31,6 @@ public:
 private:
     snakeNode *_head;
     snakeNode *_last;
-    int _lenght;
 
     int _boardWidht;
     int _boardHeight;
